@@ -1,0 +1,1070 @@
+/* ═══════════════════════════════════════
+   Phase 1: CSS Variables & Theme Foundation
+   ═══════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+[data-theme='dark'] {
+	--bg-base: #0b1120;
+	--bg-card: #0f1a2b;
+	--bg-hover: rgba(255,255,255,0.04);
+	--amber: #F5A623;
+	--amber-dim: rgba(245,166,35,0.12);
+	--amber-glow: rgba(245,166,35,0.25);
+	--green: #22c55e;
+	--green-dim: rgba(34,197,94,0.10);
+	--red: #ef4444;
+	--red-dim: rgba(239,68,68,0.10);
+	--blue: #4a9eff;
+	--indigo: #818cf8;
+	--primary: #e8ecf4;
+	--control: #0f1a2b;
+	--border: rgba(245,166,35,0.08);
+	--border-subtle: rgba(255,255,255,0.06);
+	--button: rgba(245,166,35,0.08);
+	--button-hover: rgba(245,166,35,0.15);
+	--code-toggle-button: rgba(245,166,35,0.12);
+	--header: #0b1120;
+	--filter: brightness(120%);
+	--shadow: rgba(0, 0, 0, 0.3);
+	--slider: #F5A623;
+	--play-button: #F5A623;
+	--pause-button: #ef4444;
+	--text-secondary: #7b8ba3;
+	--text-muted: #4a5a72;
+	--text-dim: #384558;
+	--radius: 10px;
+	--radius-lg: 14px;
+}
+
+
+* {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+}
+
+/* ═══════════════════════════════════════
+   Base Layout
+   ═══════════════════════════════════════ */
+
+.VisualizationMainPage body,
+.VisualizationMainPage #mainContent {
+	font-family: 'DM Sans', 'Segoe UI', sans-serif;
+}
+
+.VisualizationMainPage #mainContent {
+	background: var(--bg-base);
+	width: 100vw;
+	font-family: 'DM Sans', 'Segoe UI', sans-serif;
+	flex: 1;
+	flex-direction: column;
+	display: flex;
+	overflow: hidden;
+}
+
+.VisualizationMainPage #container {
+	background: var(--bg-base);
+	text-align: left;
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+}
+
+/* ═══════════════════════════════════════
+   Phase 2: Navbar & Breadcrumbs
+   ═══════════════════════════════════════ */
+
+.algo-navbar {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 10px 20px;
+	background: var(--bg-card);
+	border-bottom: 1px solid var(--border);
+	box-shadow: 0 1px 4px var(--shadow);
+	font-family: 'DM Sans', 'Segoe UI', sans-serif;
+	min-height: 48px;
+}
+
+.algo-navbar-logo {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	text-decoration: none;
+	color: var(--primary);
+	font-weight: 700;
+	font-size: 16px;
+	letter-spacing: -0.3px;
+}
+
+.algo-navbar-logo:visited {
+	color: var(--primary);
+}
+
+.algo-navbar-logo:hover {
+	color: var(--amber);
+}
+
+.algo-navbar-logo svg {
+	color: var(--amber);
+}
+
+.algo-navbar-right {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+}
+
+.algo-breadcrumb {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	padding: 8px 20px;
+	background: var(--bg-base);
+	border-bottom: 1px solid var(--border);
+	font-family: 'DM Sans', 'Segoe UI', sans-serif;
+	font-size: 13px;
+	color: var(--text-secondary);
+}
+
+.algo-breadcrumb a {
+	color: var(--text-muted);
+	text-decoration: none;
+	transition: color 0.15s;
+}
+
+.algo-breadcrumb a:hover {
+	color: var(--amber);
+}
+
+.algo-breadcrumb-separator {
+	color: var(--text-dim);
+	font-size: 11px;
+}
+
+.algo-breadcrumb-current {
+	color: var(--primary);
+	font-weight: 600;
+}
+
+.algo-category-badge {
+	display: inline-flex;
+	align-items: center;
+	padding: 2px 10px;
+	border-radius: 20px;
+	font-size: 11px;
+	font-weight: 600;
+	letter-spacing: 0.3px;
+	background: var(--amber-dim);
+	color: var(--amber);
+	border: 1px solid rgba(245,166,35,0.15);
+}
+
+
+/* ═══════════════════════════════════════
+   Phase 4: Toolbar / Controls
+   ═══════════════════════════════════════ */
+
+.VisualizationMainPage #algoControlSection {
+	background: var(--bg-card);
+	color: var(--primary);
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	border-bottom: 1px solid var(--border);
+	transition: all 0.3s ease;
+	padding: 10px 16px;
+	box-shadow: 0 1px 3px var(--shadow);
+}
+
+.VisualizationMainPage #toggles * {
+	margin: 0 10px;
+	color: var(--primary);
+}
+
+.VisualizationMainPage #AlgorithmSpecificControls {
+	color: var(--primary);
+	font-size: 14px;
+	font-family: 'DM Sans', 'Segoe UI', sans-serif;
+	transition: all 0.4s ease 0s;
+	vertical-align: middle;
+	padding: 5px 5px;
+}
+
+/* Buttons */
+.VisualizationMainPage input[type='button'] {
+	font-family: 'DM Sans', 'Segoe UI', sans-serif;
+	font-size: 13px;
+	font-weight: 500;
+	padding: 7px 14px;
+	margin: 4px;
+	background: var(--amber-dim);
+	color: var(--amber);
+	border: 1px solid rgba(245,166,35,0.15);
+	border-radius: 8px;
+	cursor: pointer;
+	transition: all 0.2s ease;
+	box-shadow: none;
+}
+
+.VisualizationMainPage input[type='button']:hover {
+	background: var(--amber-glow);
+	transform: translateY(-1px);
+	box-shadow: 0 2px 8px rgba(245,166,35,0.15);
+}
+
+.VisualizationMainPage input[type='button']::-moz-focus-inner {
+	border: 0;
+}
+
+.VisualizationMainPage input[type='button']:focus {
+	outline: none;
+}
+
+.VisualizationMainPage input[type='button']:active:not([disabled]) {
+	transform: translateY(0);
+	background: var(--amber-glow);
+}
+
+.VisualizationMainPage input[type='button']:disabled {
+	opacity: 0.4;
+	cursor: not-allowed;
+	transform: none;
+}
+
+/* Danger buttons (for Remove/Delete/Clear type operations) */
+.VisualizationMainPage input[type='button'][value*='Remove'],
+.VisualizationMainPage input[type='button'][value*='Delete'],
+.VisualizationMainPage input[type='button'][value*='Clear'] {
+	background: var(--red-dim);
+	color: var(--red);
+	border-color: rgba(239,68,68,0.15);
+}
+
+.VisualizationMainPage input[type='button'][value*='Remove']:hover,
+.VisualizationMainPage input[type='button'][value*='Delete']:hover,
+.VisualizationMainPage input[type='button'][value*='Clear']:hover {
+	background: rgba(239,68,68,0.18);
+	box-shadow: 0 2px 8px rgba(239,68,68,0.15);
+}
+
+/* Text inputs */
+.VisualizationMainPage input[type='text'] {
+	background: var(--bg-base);
+	border: 1px solid var(--border);
+	border-radius: 8px;
+	padding: 7px 10px;
+	font-family: 'JetBrains Mono', 'Fira Code', monospace;
+	font-size: 13px;
+	color: var(--primary);
+	transition: border-color 0.2s;
+}
+
+.VisualizationMainPage input[type='text']:focus {
+	outline: none;
+	border-color: var(--amber);
+	box-shadow: 0 0 0 3px var(--amber-dim);
+}
+
+/* Select dropdowns */
+.VisualizationMainPage select {
+	appearance: menulist-button;
+	-moz-appearance: menulist-button;
+	-webkit-appearance: menulist-button;
+	background: var(--bg-card);
+	border: 1px solid var(--border);
+	border-radius: 8px;
+	padding: 7px 10px;
+	color: var(--primary);
+	margin: 4px;
+	cursor: pointer;
+	font-family: 'DM Sans', 'Segoe UI', sans-serif;
+	font-size: 13px;
+}
+
+.VisualizationMainPage select:focus {
+	outline: none;
+	border-color: var(--amber);
+}
+
+/* Radio buttons */
+input[type='radio'] {
+	appearance: radio;
+	-moz-appearance: radio;
+	-webkit-appearance: radio;
+	margin-right: 2px;
+}
+
+input[type='radio'] + label {
+	color: var(--primary);
+	font-family: 'DM Sans', 'Segoe UI', sans-serif;
+	font-size: 13px;
+}
+
+input[type='radio']:checked + label {
+	padding: 2px 6px;
+	background: var(--amber-dim);
+	border: 1px solid rgba(245,166,35,0.2);
+	box-shadow: none;
+	border-radius: 6px;
+	color: var(--amber);
+	font-size: 13px;
+	font-weight: 600;
+}
+
+input[type='checkbox'] {
+	appearance: checkbox;
+	-moz-appearance: checkbox;
+	-webkit-appearance: checkbox;
+}
+
+/* ═══════════════════════════════════════
+   Phase 3: Layout — Always-Visible Sidebar
+   ═══════════════════════════════════════ */
+
+.VisualizationMainPage .viewport {
+	display: grid;
+	grid-template-columns: 1fr 340px;
+	grid-template-rows: minmax(0, 1fr);
+	position: relative;
+	flex: 1;
+	overflow: hidden;
+}
+
+.VisualizationMainPage .viewport.no-sidebar {
+	grid-template-columns: 1fr;
+}
+
+#canvas {
+	position: sticky;
+	width: 100%;
+	height: 100%;
+	background: var(--bg-base);
+}
+
+.txt-node {
+	color: var(--primary);
+}
+
+/* Sidebar — always visible */
+.algo-sidebar {
+	background: var(--bg-card);
+	border-left: 1px solid var(--border);
+	overflow-y: auto;
+	display: flex;
+	flex-direction: column;
+	min-height: 0;
+	scrollbar-width: thin;
+	scrollbar-color: var(--border) transparent;
+}
+
+.algo-sidebar::-webkit-scrollbar {
+	width: 6px;
+}
+
+.algo-sidebar::-webkit-scrollbar-track {
+	background: transparent;
+}
+
+.algo-sidebar::-webkit-scrollbar-thumb {
+	background-color: var(--text-dim);
+	border-radius: 3px;
+}
+
+.algo-sidebar .modal-content {
+	padding: 16px;
+	max-height: none;
+	overflow-y: visible;
+	border-radius: 0;
+	background-color: transparent;
+	box-shadow: none;
+	border: none;
+}
+
+.algo-sidebar .modal-content ul {
+	list-style-type: none;
+	padding-left: 0;
+}
+
+.algo-sidebar .modal-content li {
+	line-height: 1.5em;
+	margin: 0 0 12px 0;
+	color: var(--primary);
+	font-size: 14px;
+}
+
+@media (max-width: 768px) {
+	.VisualizationMainPage .viewport {
+		grid-template-columns: 1fr;
+	}
+
+	.algo-sidebar {
+		border-left: none;
+		border-top: 1px solid var(--border);
+		max-height: 50vh;
+	}
+
+	.VisualizationMainPage #mainContent {
+		overflow-x: auto;
+	}
+
+	.algo-breadcrumb {
+		padding: 6px 12px;
+		font-size: 12px;
+	}
+}
+
+/* ═══════════════════════════════════════
+   Phase 5: Playback Controls
+   ═══════════════════════════════════════ */
+
+.VisualizationMainPage #generalAnimationControlSection {
+	background: var(--bg-card);
+	border-top: 1px solid var(--border);
+	transition: all 0.4s ease 0s;
+}
+
+.VisualizationMainPage #GeneralAnimationControls {
+	padding: 4px 8px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+/* Playback buttons — ghost style */
+.VisualizationMainPage #generalAnimationControlSection input[type='button'] {
+	font-family: 'DM Sans', 'Segoe UI', sans-serif;
+	font-size: 12px;
+	font-weight: 500;
+	padding: 6px 12px;
+	margin: 3px;
+	background: transparent;
+	color: var(--text-secondary);
+	border: 1px solid var(--border);
+	border-radius: 8px;
+	transition: all 0.2s ease;
+	box-shadow: none;
+}
+
+.VisualizationMainPage #generalAnimationControlSection input[type='button']:hover {
+	background: var(--bg-hover);
+	color: var(--primary);
+	transform: none;
+	box-shadow: none;
+}
+
+/* Play button — special circular amber */
+.VisualizationMainPage #generalAnimationControlSection input[type='button'].play {
+	background: var(--amber) !important;
+	color: #0b1120 !important;
+	border: none !important;
+	font-weight: 600 !important;
+	box-shadow: 0 0 12px var(--amber-glow);
+}
+
+.VisualizationMainPage #generalAnimationControlSection input[type='button'].play:hover {
+	box-shadow: 0 0 20px var(--amber-glow);
+}
+
+/* Pause button — red accent */
+.VisualizationMainPage #generalAnimationControlSection input[type='button'].pause {
+	background: var(--red) !important;
+	color: white !important;
+	border: none !important;
+	font-weight: 600 !important;
+	box-shadow: 0 0 12px var(--red-dim);
+}
+
+.VisualizationMainPage #generalAnimationControlSection input[type='button'].pause:hover {
+	box-shadow: 0 0 20px rgba(239,68,68,0.3);
+}
+
+/* Speed slider — amber override */
+.slider .MuiSlider-root {
+	color: var(--amber) !important;
+}
+
+.slider .MuiSlider-thumb {
+	box-shadow: 0 0 6px var(--amber-glow) !important;
+}
+
+.slider .MuiSlider-track {
+	background: var(--amber) !important;
+}
+
+.slider .MuiSlider-rail {
+	background: var(--text-dim) !important;
+}
+
+.VisualizationMainPage .divisorLeft {
+	width: 15px;
+}
+
+.VisualizationMainPage .divisorRight {
+	border-left: 1px solid var(--border);
+	width: 15px;
+}
+
+/* ═══════════════════════════════════════
+   Phase 6: Sidebar Tabs
+   ═══════════════════════════════════════ */
+
+.modal-tabs {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 6px;
+	margin-bottom: 16px;
+	padding: 4px;
+	background: var(--bg-base);
+	border-radius: var(--radius);
+	border: none;
+	overflow: hidden;
+}
+
+.modal-tabs .tab-button {
+	padding: 8px 10px;
+	margin: 0;
+	border: 1px solid transparent;
+	background: transparent;
+	color: var(--text-muted);
+	font-family: 'DM Sans', 'Segoe UI', sans-serif;
+	font-size: 13px;
+	font-weight: 500;
+	cursor: pointer;
+	transition: all 0.2s ease;
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	border-radius: 8px;
+	border-bottom: none;
+	white-space: nowrap;
+}
+
+.modal-tabs .tab-button.active {
+	background: var(--amber-dim);
+	color: var(--amber);
+	border: 1px solid rgba(245,166,35,0.15);
+	font-weight: 600;
+}
+
+.modal-tabs .tab-button:hover:not(.active) {
+	color: var(--text-secondary);
+	background: var(--bg-hover);
+}
+
+.tab-text {
+	padding-left: 0;
+}
+
+.tab-content {
+	padding: 8px 0;
+}
+
+/* About content within tab */
+.about-content {
+	padding: 16px;
+}
+
+/* ═══════════════════════════════════════
+   Phase 7: Pseudocode & Big O Content
+   ═══════════════════════════════════════ */
+
+/* Pseudocode */
+.pseudocode-modal-content {
+	border: 1px solid var(--border);
+	border-radius: var(--radius);
+	padding: 16px;
+	background-color: var(--bg-base);
+	max-height: 500px;
+	overflow-y: auto;
+	scrollbar-width: thin;
+	scrollbar-color: var(--border) transparent;
+}
+
+.pseudocode-modal-content::-webkit-scrollbar {
+	width: 6px;
+}
+
+.pseudocode-modal-content::-webkit-scrollbar-track {
+	background: transparent;
+}
+
+.pseudocode-modal-content::-webkit-scrollbar-thumb {
+	background-color: var(--text-dim);
+	border-radius: 3px;
+}
+
+.pseudocode-line {
+	font-family: 'JetBrains Mono', 'Fira Code', monospace;
+	white-space: pre-wrap;
+	margin: 2px 0;
+	padding: 3px 8px 3px 12px;
+	line-height: 1.7;
+	color: var(--primary);
+	font-size: 12px;
+	transition: background-color 0.2s;
+	border-left: 3px solid transparent;
+	border-radius: 2px;
+}
+
+.pseudocode-line-highlighted {
+	background-color: var(--green-dim) !important;
+	border-left: 3px solid var(--green) !important;
+}
+
+.pseudocode-line:hover {
+	background-color: var(--bg-hover);
+	border-radius: 2px;
+}
+
+/* Syntax highlighting — dark theme */
+.pseudocode-keyword {
+	color: var(--indigo);
+	font-weight: 600;
+}
+
+.dark-theme .pseudocode-keyword {
+	color: var(--indigo);
+}
+
+.pseudocode-procedure {
+	color: var(--blue);
+	font-weight: 600;
+}
+
+.dark-theme .pseudocode-procedure {
+	color: var(--blue);
+}
+
+.pseudocode-end {
+	color: var(--indigo);
+	font-weight: 600;
+}
+
+.dark-theme .pseudocode-end {
+	color: var(--indigo);
+}
+
+.pseudocode-comment {
+	color: var(--green);
+	font-style: italic;
+}
+
+.dark-theme .pseudocode-comment {
+	color: var(--green);
+}
+
+.pseudocode-param {
+	color: var(--amber);
+}
+
+.dark-theme .pseudocode-param {
+	color: var(--amber);
+}
+
+/* Pseudocode header */
+.pseudocode-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 12px;
+}
+
+.pseudocode-title {
+	display: flex;
+	align-items: center;
+}
+
+.pseudocode-modal-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 16px;
+	padding-bottom: 10px;
+	border-bottom: 1px solid var(--border);
+}
+
+.pseudocode-modal-header h3 {
+	margin: 0;
+	color: var(--primary);
+	font-size: 1.2em;
+	background: none !important;
+	padding: 0;
+}
+
+.pseudocode-controls {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}
+
+.pseudocode-section-selector {
+	background-color: var(--bg-base);
+	color: var(--primary);
+	border: 1px solid var(--border);
+	border-radius: 8px;
+	padding: 6px 8px;
+	cursor: pointer;
+	font-family: 'DM Sans', 'Segoe UI', sans-serif;
+	font-size: 13px;
+	min-width: 180px;
+	-webkit-appearance: menulist;
+	-moz-appearance: menulist;
+	appearance: menulist;
+	transition: all 0.2s ease;
+}
+
+.pseudocode-section-selector:hover,
+.pseudocode-section-selector:focus {
+	border-color: var(--amber);
+	outline: none;
+}
+
+.pseudocode-modal-header button {
+	background-color: var(--amber-dim);
+	color: var(--amber);
+	border: 1px solid rgba(245,166,35,0.15);
+	border-radius: 8px;
+	padding: 6px 10px;
+	cursor: pointer;
+	font-size: 13px;
+	font-weight: 500;
+	transition: all 0.2s ease;
+	display: flex;
+	align-items: center;
+	gap: 6px;
+}
+
+.pseudocode-modal-header button:hover {
+	background-color: var(--amber-glow);
+	transform: translateY(-1px);
+}
+
+/* Code toggle button — amber accent */
+.modal-content .code-toggle-button {
+	width: 36px;
+	height: 36px;
+	display: flex;
+	position: absolute;
+	right: 1.5rem;
+	align-items: center;
+	justify-content: center;
+	background-color: var(--amber-dim);
+	color: var(--amber);
+	border: 1px solid rgba(245,166,35,0.15);
+	border-radius: 8px;
+	cursor: pointer;
+	transition: all 0.2s ease;
+	padding: 0;
+}
+
+.code-toggle-button:hover {
+	transform: scale(1.1);
+	background-color: var(--amber-glow);
+	box-shadow: 0 2px 8px var(--amber-dim);
+}
+
+
+.bigo th,
+.bigo td {
+	color: var(--primary);
+	padding: 8px 12px;
+	min-width: 50px;
+	border: 1px solid var(--border);
+	font-family: 'JetBrains Mono', 'Fira Code', monospace;
+	font-size: 12px;
+	border-radius: 4px;
+}
+
+.bigo table {
+	border-collapse: collapse;
+	width: 100%;
+}
+
+.bigo h4 {
+	margin: 0;
+	font-size: large;
+	color: var(--primary);
+}
+
+.bigo .blur {
+	filter: blur(5px);
+	transition: filter 0.3s ease;
+}
+
+/* Big O content within tab */
+.bigo-content {
+	padding: 12px;
+	max-height: 500px;
+	overflow-y: auto;
+	scrollbar-width: thin;
+	scrollbar-color: var(--border) transparent;
+}
+
+.bigo-content::-webkit-scrollbar {
+	width: 6px;
+}
+
+.bigo-content::-webkit-scrollbar-track {
+	background: transparent;
+}
+
+.bigo-content::-webkit-scrollbar-thumb {
+	background-color: var(--text-dim);
+	border-radius: 3px;
+}
+
+.bigo-content .button-container {
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	gap: 8px;
+	margin: 0 0 8px 0;
+}
+
+.bigo-content .button-container button {
+	background-color: var(--amber-dim);
+	color: var(--amber);
+	border: 1px solid rgba(245,166,35,0.15);
+	border-radius: 8px;
+	padding: 6px 10px;
+	cursor: pointer;
+	font-family: 'DM Sans', 'Segoe UI', sans-serif;
+	font-size: 13px;
+	font-weight: 500;
+	transition: all 0.2s ease;
+}
+
+.bigo-content .button-container button:hover {
+	background-color: var(--amber-glow);
+	transform: translateY(-1px);
+}
+
+.bigo-content table {
+	width: 100%;
+	border-collapse: separate;
+	border-spacing: 0;
+	margin-bottom: 12px;
+	border-radius: var(--radius);
+	overflow: hidden;
+	border: 1px solid var(--border);
+}
+
+.bigo-content th {
+	background: var(--bg-base);
+	color: var(--text-secondary);
+	font-weight: 600;
+	font-size: 12px;
+	text-transform: uppercase;
+	letter-spacing: 0.5px;
+	padding: 8px 10px;
+}
+
+.bigo-content td {
+	padding: 6px 8px;
+	border-top: 1px solid var(--border);
+	font-family: 'JetBrains Mono', 'Fira Code', monospace;
+	font-size: 11px;
+	color: var(--primary);
+	vertical-align: top;
+	word-break: normal;
+	overflow-wrap: normal;
+	white-space: normal;
+}
+
+.bigo-content td:first-child {
+	white-space: nowrap;
+	font-weight: 600;
+}
+
+/* Green for average, red for worst */
+.bigo-content td:nth-child(2) {
+	color: var(--green);
+}
+
+.bigo-content td:nth-child(3) {
+	color: var(--red);
+}
+
+.bigo-content h4 {
+	margin-top: 12px;
+	margin-bottom: 8px;
+	color: var(--primary);
+	font-family: 'DM Sans', 'Segoe UI', sans-serif;
+}
+
+.bigo-content .blur {
+	filter: blur(4px);
+	transition: filter 0.3s ease;
+}
+
+.bigo-content .big_o_cell {
+	cursor: pointer;
+}
+
+.bigo-content .bigo-hint {
+	color: var(--text-secondary);
+	font-size: 12px;
+	font-family: 'DM Sans', 'Segoe UI', sans-serif;
+	margin: 0;
+	white-space: nowrap;
+}
+
+/* Modal content buttons — scoped to tab-content so tab pills are unaffected */
+.modal-content .tab-content button {
+	background: var(--button);
+	border: 1px solid var(--border);
+	border-radius: 8px;
+	padding: 4px 10px;
+	color: var(--primary);
+	margin: 4px;
+	cursor: pointer;
+	font-family: 'DM Sans', 'Segoe UI', sans-serif;
+	font-size: 13px;
+	font-weight: 500;
+}
+
+.modal-content .tab-content .button-container {
+	display: flex;
+	justify-content: right;
+	margin-top: -1%;
+	margin-bottom: -5%;
+}
+
+.modal-content .tab-content.bigo-content .button-container {
+	justify-content: flex-end;
+	margin: 0 0 8px 0;
+}
+
+.modal-content .tab-content button:hover {
+	background: var(--button-hover);
+}
+
+/* ═══════════════════════════════════════
+   Utility & Misc
+   ═══════════════════════════════════════ */
+
+.VisualizationMainPage .vgroup {
+	display: flex;
+	flex-direction: column;
+}
+
+.VisualizationMainPage .hgroup {
+	display: flex;
+	justify-content: space-evenly;
+	align-items: center;
+}
+
+.VisualizationMainPage .groupChild {
+	margin: 5px;
+}
+
+.VisualizationMainPage .equation {
+	font-family: Georgia, 'Times New Roman', Times, serif;
+	font-style: italic;
+	text-align: center;
+	margin: -5px 0 5px 0;
+}
+
+.VisualizationMainPage .inline-eq {
+	font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.VisualizationMainPage #mainContent h1,
+.VisualizationMainPage #mainContent h2,
+.VisualizationMainPage #mainContent h3 {
+	padding: 0 16px;
+	background: transparent;
+	color: var(--primary);
+	font-family: 'DM Sans', 'Segoe UI', sans-serif;
+}
+
+em {
+	text-decoration: bold;
+}
+
+/* Pseudocode toggle icon */
+.pseudocode-toggle {
+	cursor: pointer;
+	transition: 0.2s;
+}
+
+.pseudocode-toggle:hover {
+	scale: 125%;
+}
+
+.pseudocode-modal-icon {
+	color: var(--primary);
+	transition: all 0.2s ease;
+}
+
+.pseudocode-modal-icon:hover {
+	color: var(--amber);
+	transform: scale(1.15);
+}
+
+.menu-modal {
+	width: 35px;
+	height: 35px;
+	margin-right: 20px;
+	cursor: pointer;
+	transition: all 0.2s ease;
+	color: var(--primary);
+}
+
+.menu-modal:hover {
+	color: var(--amber);
+	transform: scale(1.1);
+}
+
+/* Shake animation */
+.shake {
+	animation: shake 0.75s cubic-bezier(0.455, 0.03, 0.515, 0.955) both;
+	border-color: var(--red) !important;
+	box-shadow: 0 0 4px var(--red-dim) !important;
+	filter: brightness(100%) !important;
+	pointer-events: none !important;
+}
+
+@keyframes shake {
+	10%, 90% { transform: translate3d(-1px, 0, 0); }
+	20%, 80% { transform: translate3d(2px, 0, 0); }
+	30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
+	40%, 60% { transform: translate3d(4px, 0, 0); }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+	.tab-text {
+		display: none;
+	}
+
+	.modal-tabs .tab-button {
+		padding: 6px 10px;
+	}
+
+	.pseudocode-header {
+		flex-direction: column;
+		gap: 8px;
+		align-items: flex-start;
+	}
+
+	.pseudocode-section-selector {
+		width: 100%;
+	}
+
+	.code-toggle-button {
+		align-self: flex-end;
+		margin-top: -40px;
+	}
+
+	.bigo-content table {
+		font-size: 12px;
+	}
+}
+
+@media (max-width: 576px) {
+	.algo-sidebar {
+		max-height: 40vh;
+	}
+}
