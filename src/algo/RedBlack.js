@@ -253,22 +253,32 @@ export default class RedBlackTree extends Algorithm {
 
 	insertElement(value) {
 		this.commands = [];
+		this.highlight(0, 0, 'insert');
 		this.cmd(act.setText, 0, 'Inserting ' + value);
+		this.unhighlight(0, 0, 'insert');
+		this.highlight(2, 0, 'insert');
 		this.treeRoot = this.insert(value, this.treeRoot);
+		this.unhighlight(2, 0, 'insert');
+		this.highlight(4, 0, 'insert');
 		this.treeRoot.blackLevel = 1;
 		this.fixNodeColor(this.treeRoot);
 		this.resizeTree();
+		this.unhighlight(4, 0, 'insert');
 		this.cmd(act.setText, 0, '');
 		return this.commands;
 	}
 
 	insert(elem, tree) {
 		if (tree == null) {
+			this.unhighlight(2, 0, 'insert');
+			this.highlight(1, 0, 'insert');
 			const id = this.nextIndex++;
 			this.cmd(act.createCircle, id, elem, NODE_SIZE, STARTING_Y);
 			this.cmd(act.setForegroundColor, id, FOREGROUND_RED);
 			this.cmd(act.setBackgroundColor, id, BACKGROUND_RED);
 			this.cmd(act.step);
+			this.unhighlight(1, 0, 'insert');
+			this.highlight(2, 0, 'insert');
 			const node = new RedBlackNode(elem, id);
 			node.blackLevel = 0; // new nodes are red
 			this.attachNullLeaves(node);
@@ -400,6 +410,7 @@ export default class RedBlackTree extends Algorithm {
 
 		if (uncle != null && !uncle.phantomLeaf && uncle.blackLevel === 0) {
 			// Case 1: uncle is red — recolor
+			this.highlight(3, 0, 'fixDoubleRed');
 			this.cmd(act.setText, 0, 'Uncle is red: recolor grandparent red, parent & uncle black');
 			uncle.blackLevel = 1;
 			parent.blackLevel = 1;
@@ -408,11 +419,14 @@ export default class RedBlackTree extends Algorithm {
 			this.fixNodeColor(parent);
 			this.fixNodeColor(grandparent);
 			this.cmd(act.step);
+			this.unhighlight(3, 0, 'fixDoubleRed');
 			return grandparent;
 		} else {
 			// Case 2: uncle is black — rotate right
+			this.highlight(8, 0, 'fixDoubleRed');
 			this.cmd(act.setText, 0, 'Uncle is black: right rotation');
 			this.cmd(act.step);
+			this.unhighlight(8, 0, 'fixDoubleRed');
 			// parent takes grandparent's black level, grandparent becomes red
 			parent.blackLevel = grandparent.blackLevel;
 			grandparent.blackLevel = 0;
@@ -429,6 +443,7 @@ export default class RedBlackTree extends Algorithm {
 		const child = parent.right;
 
 		if (uncle != null && !uncle.phantomLeaf && uncle.blackLevel === 0) {
+			this.highlight(3, 0, 'fixDoubleRed');
 			this.cmd(act.setText, 0, 'Uncle is red: recolor grandparent red, parent & uncle black');
 			uncle.blackLevel = 1;
 			parent.blackLevel = 1;
@@ -437,10 +452,13 @@ export default class RedBlackTree extends Algorithm {
 			this.fixNodeColor(parent);
 			this.fixNodeColor(grandparent);
 			this.cmd(act.step);
+			this.unhighlight(3, 0, 'fixDoubleRed');
 			return grandparent;
 		} else {
+			this.highlight(8, 0, 'fixDoubleRed');
 			this.cmd(act.setText, 0, 'Uncle is black: left-right rotation');
 			this.cmd(act.step);
+			this.unhighlight(8, 0, 'fixDoubleRed');
 			// First rotate left at parent, then right at grandparent
 			child.blackLevel = grandparent.blackLevel;
 			grandparent.blackLevel = 0;
@@ -461,6 +479,7 @@ export default class RedBlackTree extends Algorithm {
 		const parent = grandparent.right;
 
 		if (uncle != null && !uncle.phantomLeaf && uncle.blackLevel === 0) {
+			this.highlight(3, 0, 'fixDoubleRed');
 			this.cmd(act.setText, 0, 'Uncle is red: recolor grandparent red, parent & uncle black');
 			uncle.blackLevel = 1;
 			parent.blackLevel = 1;
@@ -469,10 +488,13 @@ export default class RedBlackTree extends Algorithm {
 			this.fixNodeColor(parent);
 			this.fixNodeColor(grandparent);
 			this.cmd(act.step);
+			this.unhighlight(3, 0, 'fixDoubleRed');
 			return grandparent;
 		} else {
+			this.highlight(8, 0, 'fixDoubleRed');
 			this.cmd(act.setText, 0, 'Uncle is black: left rotation');
 			this.cmd(act.step);
+			this.unhighlight(8, 0, 'fixDoubleRed');
 			parent.blackLevel = grandparent.blackLevel;
 			grandparent.blackLevel = 0;
 			this.singleRotateLeft(grandparent);
@@ -488,6 +510,7 @@ export default class RedBlackTree extends Algorithm {
 		const child = parent.left;
 
 		if (uncle != null && !uncle.phantomLeaf && uncle.blackLevel === 0) {
+			this.highlight(3, 0, 'fixDoubleRed');
 			this.cmd(act.setText, 0, 'Uncle is red: recolor grandparent red, parent & uncle black');
 			uncle.blackLevel = 1;
 			parent.blackLevel = 1;
@@ -496,10 +519,13 @@ export default class RedBlackTree extends Algorithm {
 			this.fixNodeColor(parent);
 			this.fixNodeColor(grandparent);
 			this.cmd(act.step);
+			this.unhighlight(3, 0, 'fixDoubleRed');
 			return grandparent;
 		} else {
+			this.highlight(8, 0, 'fixDoubleRed');
 			this.cmd(act.setText, 0, 'Uncle is black: right-left rotation');
 			this.cmd(act.step);
+			this.unhighlight(8, 0, 'fixDoubleRed');
 			child.blackLevel = grandparent.blackLevel;
 			grandparent.blackLevel = 0;
 			this.singleRotateRight(parent);
@@ -517,21 +543,30 @@ export default class RedBlackTree extends Algorithm {
 
 	deleteElement(value) {
 		this.commands = [];
+		this.highlight(0, 0, 'delete');
 		this.cmd(act.setText, 0, 'Deleting ' + value);
+		this.unhighlight(0, 0, 'delete');
+		this.highlight(1, 0, 'delete');
 		this.treeRoot = this.treeDelete(this.treeRoot, value);
+		this.unhighlight(1, 0, 'delete');
+		this.highlight(8, 0, 'delete');
 		if (this.treeRoot != null) {
 			this.treeRoot.blackLevel = 1;
 			this.fixNodeColor(this.treeRoot);
 		}
 		this.resizeTree();
+		this.unhighlight(8, 0, 'delete');
 		this.cmd(act.setText, 0, '');
 		return this.commands;
 	}
 
 	treeDelete(tree, value) {
 		if (tree == null || tree.phantomLeaf) {
+			this.unhighlight(1, 0, 'delete');
+			this.highlight(2, 0, 'delete');
 			this.cmd(act.setText, 0, value + ' not found in tree');
 			this.cmd(act.step);
+			this.unhighlight(2, 0, 'delete');
 			return tree;
 		}
 
@@ -560,23 +595,33 @@ export default class RedBlackTree extends Algorithm {
 
 			if (!leftIsNull && !rightIsNull) {
 				// Two real children — replace with successor or predecessor
+				this.highlight(3, 0, 'delete');
 				if (this.predSucc === 'succ') {
+					this.highlight(4, 0, 'delete');
 					this.cmd(act.setText, 0, 'Two children: finding in-order successor');
 					this.cmd(act.step);
+					this.unhighlight(4, 0, 'delete');
+					this.highlight(5, 0, 'delete');
 					const succ = this.findMin(tree.right);
 					tree.data = succ.data;
 					this.cmd(act.setText, tree.graphicID, tree.data);
 					tree.right = this.treeDelete(tree.right, succ.data);
 					if (tree.right != null) tree.right.parent = tree;
+					this.unhighlight(5, 0, 'delete');
 				} else {
+					this.highlight(4, 0, 'delete');
 					this.cmd(act.setText, 0, 'Two children: finding in-order predecessor');
 					this.cmd(act.step);
+					this.unhighlight(4, 0, 'delete');
+					this.highlight(5, 0, 'delete');
 					const pred = this.findMax(tree.left);
 					tree.data = pred.data;
 					this.cmd(act.setText, tree.graphicID, tree.data);
 					tree.left = this.treeDelete(tree.left, pred.data);
 					if (tree.left != null) tree.left.parent = tree;
+					this.unhighlight(5, 0, 'delete');
 				}
+				this.unhighlight(3, 0, 'delete');
 			} else if (leftIsNull && rightIsNull) {
 				// Leaf node
 				const wasBlack = tree.blackLevel >= 1;
@@ -668,8 +713,10 @@ export default class RedBlackTree extends Algorithm {
 
 		if (sibling == null || sibling.phantomLeaf) {
 			// Push double-black up
+			this.highlight(9, 0, 'fixExtraBlack');
 			this.cmd(act.setText, 0, 'Sibling is null: push double-black up');
 			this.cmd(act.step);
+			this.unhighlight(9, 0, 'fixExtraBlack');
 			if (dbChild.phantomLeaf) {
 				this.cmd(act.delete, dbChild.graphicID);
 				if (isLeftChild) parNode.left = null;
@@ -690,8 +737,10 @@ export default class RedBlackTree extends Algorithm {
 
 		if (sibling.blackLevel === 0) {
 			// Case: sibling is red — rotate to make sibling black
+			this.highlight(4, 0, 'fixExtraBlack');
 			this.cmd(act.setText, 0, 'Sibling is red: rotate to get black sibling');
 			this.cmd(act.step);
+			this.unhighlight(4, 0, 'fixExtraBlack');
 			const oldParBlack = parNode.blackLevel;
 			parNode.blackLevel = 0;
 			sibling.blackLevel = oldParBlack;
@@ -713,8 +762,10 @@ export default class RedBlackTree extends Algorithm {
 
 		if (sibLeftBlack && sibRightBlack) {
 			// Case: sibling has two black children — recolor
+			this.highlight(7, 0, 'fixExtraBlack');
 			this.cmd(act.setText, 0, 'Sibling has 2 black children: recolor sibling red, push up');
 			this.cmd(act.step);
+			this.unhighlight(7, 0, 'fixExtraBlack');
 			sibling.blackLevel = 0;
 			this.fixNodeColor(sibling);
 			if (dbChild.phantomLeaf) {
@@ -736,8 +787,10 @@ export default class RedBlackTree extends Algorithm {
 		if (isLeftChild) {
 			if (!sibRightBlack) {
 				// Case: sibling's far child (right) is red
+				this.highlight(11, 0, 'fixExtraBlack');
 				this.cmd(act.setText, 0, "Sibling's far child is red: left rotation");
 				this.cmd(act.step);
+				this.unhighlight(11, 0, 'fixExtraBlack');
 				sibling.right.blackLevel = sibling.blackLevel;
 				sibling.blackLevel = parNode.blackLevel;
 				parNode.blackLevel = 1;
@@ -756,8 +809,10 @@ export default class RedBlackTree extends Algorithm {
 				return sibling; // sibling is new root
 			} else {
 				// sibling's near child (left) is red
+				this.highlight(12, 0, 'fixExtraBlack');
 				this.cmd(act.setText, 0, "Sibling's near child is red: right-left rotation");
 				this.cmd(act.step);
+				this.unhighlight(12, 0, 'fixExtraBlack');
 				const nearChild = sibling.left;
 				nearChild.blackLevel = parNode.blackLevel;
 				parNode.blackLevel = 1;
@@ -781,8 +836,10 @@ export default class RedBlackTree extends Algorithm {
 		} else {
 			if (!sibLeftBlack) {
 				// sibling's far child (left) is red
+				this.highlight(11, 0, 'fixExtraBlack');
 				this.cmd(act.setText, 0, "Sibling's far child is red: right rotation");
 				this.cmd(act.step);
+				this.unhighlight(11, 0, 'fixExtraBlack');
 				sibling.left.blackLevel = sibling.blackLevel;
 				sibling.blackLevel = parNode.blackLevel;
 				parNode.blackLevel = 1;
@@ -801,8 +858,10 @@ export default class RedBlackTree extends Algorithm {
 				return sibling;
 			} else {
 				// sibling's near child (right) is red
+				this.highlight(12, 0, 'fixExtraBlack');
 				this.cmd(act.setText, 0, "Sibling's near child is red: left-right rotation");
 				this.cmd(act.step);
+				this.unhighlight(12, 0, 'fixExtraBlack');
 				const nearChild = sibling.right;
 				nearChild.blackLevel = parNode.blackLevel;
 				parNode.blackLevel = 1;
@@ -837,21 +896,31 @@ export default class RedBlackTree extends Algorithm {
 
 	doFind(tree, value) {
 		this.cmd(act.setText, 0, 'Searching for ' + value);
+		this.highlight(0, 0, 'find');
 		if (tree == null || tree.phantomLeaf) {
+			this.highlight(1, 0, 'find');
 			this.cmd(act.setText, 0, 'Searching for ' + value + ': not found');
 			this.cmd(act.step);
+			this.unhighlight(0, 0, 'find');
+			this.unhighlight(1, 0, 'find');
 			return;
 		}
 		this.cmd(act.setHighlight, tree.graphicID, 1);
 		const cmp = this.compare(value, tree.data);
 		if (cmp === 0) {
+			this.highlight(2, 0, 'find');
 			this.cmd(act.setText, 0, 'Found ' + value + '!');
 			this.cmd(act.step);
 			this.cmd(act.setHighlight, tree.graphicID, 0);
+			this.unhighlight(0, 0, 'find');
+			this.unhighlight(2, 0, 'find');
 		} else if (cmp < 0) {
+			this.highlight(3, 0, 'find');
 			this.cmd(act.setText, 0, `${value} < ${tree.data}: go left`);
 			this.cmd(act.step);
 			this.cmd(act.setHighlight, tree.graphicID, 0);
+			this.unhighlight(0, 0, 'find');
+			this.unhighlight(3, 0, 'find');
 			if (tree.left != null && !tree.left.phantomLeaf) {
 				this.cmd(act.createHighlightCircle, this.highlightID, HIGHLIGHT_COLOR, tree.x, tree.y);
 				this.cmd(act.move, this.highlightID, tree.left.x, tree.left.y);
@@ -860,9 +929,12 @@ export default class RedBlackTree extends Algorithm {
 			}
 			this.doFind(tree.left, value);
 		} else {
+			this.highlight(4, 0, 'find');
 			this.cmd(act.setText, 0, `${value} > ${tree.data}: go right`);
 			this.cmd(act.step);
 			this.cmd(act.setHighlight, tree.graphicID, 0);
+			this.unhighlight(0, 0, 'find');
+			this.unhighlight(4, 0, 'find');
 			if (tree.right != null && !tree.right.phantomLeaf) {
 				this.cmd(act.createHighlightCircle, this.highlightID, HIGHLIGHT_COLOR, tree.x, tree.y);
 				this.cmd(act.move, this.highlightID, tree.right.x, tree.right.y);
@@ -899,29 +971,41 @@ export default class RedBlackTree extends Algorithm {
 	}
 
 	printTreeRec(tree) {
-		if (tree == null || tree.phantomLeaf) return;
+		if (tree == null || tree.phantomLeaf) {
+			this.highlight(1, 0, 'print');
+			this.unhighlight(1, 0, 'print');
+			return;
+		}
+		this.highlight(0, 0, 'print');
 		this.cmd(act.step);
 		if (tree.left != null && !tree.left.phantomLeaf) {
+			this.highlight(2, 0, 'print');
 			this.cmd(act.move, this.highlightID, tree.left.x, tree.left.y);
 			this.printTreeRec(tree.left);
 			this.cmd(act.move, this.highlightID, tree.x, tree.y);
 			this.cmd(act.step);
+			this.unhighlight(2, 0, 'print');
 		}
+		this.highlight(3, 0, 'print');
 		const nextLabelID = this.nextIndex++;
 		this.cmd(act.createLabel, nextLabelID, tree.data, tree.x, tree.y);
 		this.cmd(act.setForegroundColor, nextLabelID, PRINT_COLOR);
 		this.cmd(act.move, nextLabelID, this.xPosOfNextLabel, this.yPosOfNextLabel);
 		this.cmd(act.step);
+		this.unhighlight(0, 0, 'print');
+		this.unhighlight(3, 0, 'print');
 		this.xPosOfNextLabel += PRINT_HORIZONTAL_GAP;
 		if (this.xPosOfNextLabel > this.print_max) {
 			this.xPosOfNextLabel = this.first_print_pos_x;
 			this.yPosOfNextLabel += PRINT_VERTICAL_GAP;
 		}
 		if (tree.right != null && !tree.right.phantomLeaf) {
+			this.highlight(4, 0, 'print');
 			this.cmd(act.move, this.highlightID, tree.right.x, tree.right.y);
 			this.printTreeRec(tree.right);
 			this.cmd(act.move, this.highlightID, tree.x, tree.y);
 			this.cmd(act.step);
+			this.unhighlight(4, 0, 'print');
 		}
 	}
 

@@ -2492,6 +2492,42 @@
 				["  update parent links accordingly"],
 				["end procedure"]
 			]
+		},
+		"find": {
+			"code": [
+				["procedure find(value):"],
+				["  if curr == null: return NOT FOUND"],
+				["  if value == curr.data: return curr"],
+				["  else if value < curr.data: return find(curr.left, value)"],
+				["  else: return find(curr.right, value)"],
+				["end procedure"]
+			],
+			"english": [
+				["procedure find(value):"],
+				["  if curr is null: value not in tree"],
+				["  if value equals curr.data: found!"],
+				["  else if value < curr.data: go left"],
+				["  else: go right"],
+				["end procedure"]
+			]
+		},
+		"print": {
+			"code": [
+				["procedure print(tree):"],
+				["  if tree == null: return"],
+				["  print(tree.left)"],
+				["  output tree.data"],
+				["  print(tree.right)"],
+				["end procedure"]
+			],
+			"english": [
+				["procedure print(tree):"],
+				["  if tree is null: return"],
+				["  recursively print left subtree"],
+				["  output current node value"],
+				["  recursively print right subtree"],
+				["end procedure"]
+			]
 		}
 	}
 }
