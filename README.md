@@ -43,6 +43,25 @@ npm run build
 
 The optimized output is written to the `build/` directory.
 
+## Deployment
+
+Development happens on your laptop and is pushed to GitHub. The university web server (cerf) hosts the app at `/shared/web/structstudio/` — that directory contains both the git checkout and the files Apache serves. To update the live site, SSH into cerf and run `./deploy.sh`; the script pulls the latest commit, rebuilds, and overlays the built files in place.
+
+**One-time setup on cerf:**
+
+```bash
+cd /shared/web/structstudio
+git clone https://github.com/JoshuaCongHu/cse250DSA.git .
+npm install
+chmod +x deploy.sh
+```
+
+**To update:**
+
+```bash
+./deploy.sh
+```
+
 ## Supported Algorithms
 
 | Category | Algorithms |
