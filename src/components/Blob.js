@@ -46,7 +46,7 @@ const Blob = () => {
 					<div>{blobTips[tipIndex]}</div>
 				</div>
 			)}
-			<img src="/images/team/example-logo.png" alt="" className="blobLogo" id="blobLogo" ref={imgRef} />
+			<img src={`${process.env.PUBLIC_URL}/images/team/example-logo.png`} alt="" className="blobLogo" id="blobLogo" ref={imgRef} />
 			<svg
 				version="1.1"
 				xmlns="http://www.w3.org/2000/svg"

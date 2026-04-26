@@ -706,8 +706,8 @@ const HomeScreen = () => {
 				</div>
 				<div style={{ display: "flex", justifyContent: "center", gap: 24, marginBottom: 48 }}>
 					{[
-						{ name: "Amaan Sheikh", role: "Cofounder", linkedin: "https://www.linkedin.com/in/amaansheikhme/", image: "/images/team/Amaan.JPG", imgScale: 2.2, imgPosition: "center 30%" },
-						{ name: "Joshua Hu", role: "Cofounder", linkedin: "https://www.linkedin.com/in/joshua-cong-hu/", image: "/images/team/Josh.png" },
+						{ name: "Amaan Sheikh", role: "Cofounder", linkedin: "https://www.linkedin.com/in/amaansheikhme/", image: `${process.env.PUBLIC_URL}/images/team/Amaan.JPG`, imgScale: 2.2, imgPosition: "center 30%" },
+						{ name: "Joshua Hu", role: "Cofounder", linkedin: "https://www.linkedin.com/in/joshua-cong-hu/", image: `${process.env.PUBLIC_URL}/images/team/Josh.png` },
 					].map((person) => (
 						<a
 							key={person.name}

@@ -13,7 +13,7 @@ const creators = [
 		name: 'Amaan Sheikh',
 		role: 'Cofounder',
 		linkedin: 'https://www.linkedin.com/in/amaansheikhme/',
-		image: '/images/team/Amaan.JPG',
+		image: `${process.env.PUBLIC_URL}/images/team/Amaan.JPG`,
 		imgScale: 2.2,
 		imgPosition: 'center 30%',
 	},
@@ -21,7 +21,7 @@ const creators = [
 		name: 'Joshua Hu',
 		role: 'Cofounder',
 		linkedin: 'https://www.linkedin.com/in/joshua-cong-hu/',
-		image: '/images/team/Josh.png',
+		image: `${process.env.PUBLIC_URL}/images/team/Josh.png`,
 	},
 ];
 
