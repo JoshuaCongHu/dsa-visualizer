@@ -2,6 +2,8 @@
 
 An interactive data structure and algorithm visualization tool built for CSE 250 at the University at Buffalo. Explore 57 algorithms through step-by-step canvas animations, pseudocode walkthroughs, and Big O analysis.
 
+**Live site:** [cse.buffalo.edu/structstudio](https://cse.buffalo.edu/structstudio/)
+
 ## Features
 
 - **57 visualizations** spanning lists, trees, sorting, hashing, graphs, string matching, and dynamic programming
@@ -100,6 +102,8 @@ src/
 See [CONTRIBUTING.md](CONTRIBUTING.md) for development setup, project structure details, and pull request guidelines.
 
 ## Acknowledgments
+
+Co-developed with [Amaan Sheikh](https://github.com/amaanomo).
 
 Built on the visualization framework originally created by [David Galles](https://www.cs.usfca.edu/~galles/visualization/) at the University of San Francisco, with subsequent contributions by Rodrigo Pontes at the Georgia Institute of Technology.
 
