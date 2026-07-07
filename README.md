@@ -1,8 +1,16 @@
 # UB StructStudio
 
+[![Live Site](https://img.shields.io/badge/live%20site-cse.buffalo.edu%2Fstructstudio-orange)](https://cse.buffalo.edu/structstudio/)
+[![React](https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=white&labelColor=20232a)](https://react.dev/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-3-06B6D4?logo=tailwindcss&logoColor=white&labelColor=0f172a)](https://tailwindcss.com/)
+[![Material-UI](https://img.shields.io/badge/Material--UI-5-007FFF?logo=mui&logoColor=white&labelColor=0f172a)](https://mui.com/)
+[![License: BSD 2-Clause](https://img.shields.io/badge/license-BSD%202--Clause-blue)](LICENSE.md)
+
 An interactive data structure and algorithm visualization tool built for CSE 250 at the University at Buffalo. Explore 57 algorithms through step-by-step canvas animations, pseudocode walkthroughs, and Big O analysis.
 
 **Live site:** [cse.buffalo.edu/structstudio](https://cse.buffalo.edu/structstudio/)
+
+![UB StructStudio landing page](docs/images/landing.png)
 
 ## Features
 
@@ -14,6 +22,13 @@ An interactive data structure and algorithm visualization tool built for CSE 250
   - **Big O** — best, average, and worst case complexity breakdowns
 - **Dark theme** interface with canvas color remapping
 
+## Screenshots
+
+| Graph algorithms | Sorting algorithms |
+|---|---|
+| ![Dijkstra's algorithm mid-run, showing the priority queue, visited set, and live distance map](docs/images/dijkstra.png) | ![Quicksort mid-run, showing the pivot, i/j pointers, and comparison/swap counts](docs/images/quicksort.png) |
+| Dijkstra's shortest path, stepping through the priority queue and distance map live | Quicksort partitioning, tracking pivot choice, pointers, comparisons, and swaps |
+
 ## Getting Started
 
 ### Prerequisites
@@ -24,8 +39,8 @@ An interactive data structure and algorithm visualization tool built for CSE 250
 ### Installation
 
 ```bash
-git clone https://github.com/JoshuaCongHu/cse250DSA.git
-cd cse250DSA
+git clone https://github.com/JoshuaCongHu/dsa-visualizer.git
+cd dsa-visualizer
 npm install
 ```
 
@@ -53,7 +68,7 @@ Development happens on your laptop and is pushed to GitHub. The university web s
 
 ```bash
 cd /shared/web/structstudio
-git clone https://github.com/JoshuaCongHu/cse250DSA.git .
+git clone https://github.com/JoshuaCongHu/dsa-visualizer.git .
 npm install
 chmod +x deploy.sh
 ```
@@ -101,9 +116,9 @@ src/
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for development setup, project structure details, and pull request guidelines.
 
-## Acknowledgments
+## Team & Acknowledgments
 
-Co-developed with [Amaan Sheikh](https://github.com/amaanomo).
+Co-developed with [Amaan Sheikh](https://github.com/amaanomo) — see the [About page](https://cse.buffalo.edu/structstudio/about) for the full team and project background.
 
 Built on the visualization framework originally created by [David Galles](https://www.cs.usfca.edu/~galles/visualization/) at the University of San Francisco, with subsequent contributions by Rodrigo Pontes at the Georgia Institute of Technology.
 
